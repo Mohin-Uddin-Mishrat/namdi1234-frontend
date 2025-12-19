@@ -1,10 +1,16 @@
 // Define a type for your user (example)
 export interface User {
-    id: string;
-    name: string;
-    email: string;
-  }
-  
+  email: string;
+  phone: string;
+  userEmail: string;
+  userId: string;
+  clientId: string;
+  role: string;
+  specialToken: string;
+  accessToken: string;
+  refreshToken: string;
+}
+
   // Define a type for your app's theme (example)
   export type Theme = 'light' | 'dark';
   

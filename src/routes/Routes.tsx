@@ -6,7 +6,6 @@ import Home from "@/components/Home/Home";
 import AdminRoute from "./AdminRoutes";
 import AdminDashboard from "@/pages/Admin/AdminDashboard";
 import Login from "@/pages/Login";
-import Signup from "@/pages/Signup";
 import Form from "@/pages/Form";
 import Services from "@/pages/Services";
 import Shop from "@/components/Shop/Shop";
@@ -15,6 +14,11 @@ import Proposal from "@/components/PROPOSAL/Proposal";
 import About from "@/components/AboutUs/About";
 import Blog from "@/components/blog/Blog";
 import ContactUs from "@/components/contact/ContactUs";
+import RegisterPage from "@/pages/Register";
+import VendorRegisterPage from "@/pages/VendorRegisterPage";
+import ProtectedRoute from "./ProtectedRoutes";
+import VendorDashboardLayout from "@/pages/VendorPanel/VendorDashboardLayout";
+import { getVedordRoutes } from "./VendorRoutes";
 
 const routes = createBrowserRouter([
   {
@@ -29,34 +33,34 @@ const routes = createBrowserRouter([
       //   path: "/account",
       //   element: <AccountDetails></AccountDetails>,
       // },
-      
+
       {
         path: "/services",
         element: <Services />,
       },
-       {
+      {
         path: "/shop",
         element: <Shop></Shop>,
       },
-            {
+      {
         path: "/Catalogue",
         element: <Catelogue></Catelogue>,
       },
-             {
+      {
         path: "/proposal",
-        element:<Proposal></Proposal>,
+        element: <Proposal></Proposal>,
       },
-             {
+      {
         path: "/about",
-        element:<About></About>,
+        element: <About></About>,
       },
-       {
+      {
         path: "/contact",
-        element:<ContactUs></ContactUs>,
+        element: <ContactUs></ContactUs>,
       },
-             {
+      {
         path: "/blog",
-        element:<Blog></Blog>,
+        element: <Blog></Blog>,
       },
 
       {
@@ -69,7 +73,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: <RegisterPage />,
+      },
+      {
+        path: "/vendor-signup",
+        element: <VendorRegisterPage />,
       },
       {
         path: "/admin",
@@ -83,6 +91,15 @@ const routes = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "/vendor-dashboard",
+    element: (
+      <ProtectedRoute allowedRoles={["VENDOR"]}>
+        <VendorDashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: getVedordRoutes(),
   },
 ]);
 
