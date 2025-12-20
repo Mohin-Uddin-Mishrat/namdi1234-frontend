@@ -19,6 +19,7 @@ import VendorRegisterPage from "@/pages/VendorRegisterPage";
 import ProtectedRoute from "./ProtectedRoutes";
 import VendorDashboardLayout from "@/pages/VendorPanel/VendorDashboardLayout";
 import { getVedordRoutes } from "./VendorRoutes";
+import Table from "@/pages/Table";
 
 const routes = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ const routes = createBrowserRouter([
         path: "/shop",
         element: <Shop></Shop>,
       },
+      
       {
         path: "/Catalogue",
         element: <Catelogue></Catelogue>,

@@ -1,43 +1,47 @@
-// import { ChevronRight } from "lucide-react";
-
-// export default function CategorySidebar({ categories }) {
-//   return (
-//     <div className="bg-green-800 text-white rounded-lg p-6">
-//       <h2 className="text-xl font-bold mb-4">All Categories</h2>
-//       <ul className="space-y-3">
-//         {categories.map((cat) => (
-//           <li
-//             key={cat}
-//             className="flex items-center gap-3 hover:bg-green-700 px-3 py-2 rounded transition cursor-pointer"
-//           >
-//             <ChevronRight className="w-5 h-5 text-green-300" />
-//             <span>{cat}</span>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
+// components/CategorySidebar.tsx
+import { useGetCategoriesQuery } from '@/store/Api/ProductApi.ts/ProductApi';
+import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
-import { ChevronRight } from "lucide-react";
 
-interface CategorySidebarProps {
-  categories: string[];
-}
+export default function CategorySidebar() {
+  const { data: categories = [], isLoading, error } = useGetCategoriesQuery();
 
-export default function CategorySidebar({ categories }: CategorySidebarProps) {
+  if (isLoading) {
+    return (
+      <div className="bg-green-800 text-white rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">All Categories</h2>
+        <p>Loading categories...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-green-800 text-white rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">All Categories</h2>
+        <p className="text-red-300">Failed to load categories.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-green-800 text-white rounded-lg p-6">
       <h2 className="text-xl font-bold mb-4">All Categories</h2>
       <ul className="space-y-3">
         {categories.map((cat) => (
           <li
-            key={cat}
+            key={cat._id}
             className="flex items-center gap-3 hover:bg-green-700 px-3 py-2 rounded transition cursor-pointer"
           >
-            <ChevronRight className="w-5 h-5 text-green-300" />
-            <span>{cat}</span>
+            <Link
+              to={`/products/${encodeURIComponent(cat.categoryName)}`}
+              className="flex items-center w-full"
+            >
+              <ChevronRight className="w-5 h-5 text-green-300 flex-shrink-0" />
+              <span className="truncate">{cat.categoryName}</span>
+            </Link>
           </li>
         ))}
       </ul>

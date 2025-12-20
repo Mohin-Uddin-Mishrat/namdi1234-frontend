@@ -70,21 +70,7 @@ import FAQ from "../FAQ";
 import BannerandPro from "./components/BannerandPro";
 import SolarMarquee from "../SolarMarquee";
 
-const categories = [
-  "Bulbs",
-  "CCTV Cameras",
-  "Smart TV",
-  "Solar Battery",
-  "Solar Charge Controller",
-  "Solar Fan",
-  "Solar Generator",
-  "Solar Inverter",
-  "Solar Panel",
-  "Solar Pumps",
-  "Solar Security Camera",
-  "Solar Street Light",
-  "Installation Accessories",
-];
+
 
 export default function Home() {
   return (
@@ -94,7 +80,7 @@ export default function Home() {
         <div className="mx-auto px-4 py-6 flex flex-col-reverse lg:flex-row gap-6 max-w-screen-2xl">
           {/* Sidebar */}
           <div className="w-full lg:w-1/5">
-            <CategorySidebar categories={categories} />
+            <CategorySidebar  />
             <div className="mt-6">
               <DiscountCard
                 // title="Fans"

@@ -18,7 +18,7 @@ interface MenuItem {
 
 const VendorSidebar = () => {
   const location = useLocation();
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  // const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const menuItems: MenuItem[] = [
     {
@@ -58,20 +58,30 @@ const VendorSidebar = () => {
     },
   ];
 
+  const getIsActive = (itemPath: string): boolean => {
+    if (itemPath === '/vendor-dashboard') {
+      // Only active if path is exactly /vendor-dashboard OR /vendor-dashboard/ (with no deeper segments)
+      return location.pathname === '/vendor-dashboard' || 
+             location.pathname === '/vendor-dashboard/';
+    }
+    // For all other items: active if path starts with itemPath + '/' OR equals itemPath
+    return location.pathname === itemPath || location.pathname.startsWith(itemPath + '/');
+  };
+
+
   return (
-    <aside className="w-64 bg-white text-gray-700 min-h-screen fixed left-0 top-0 border-r border-gray-200">
+   <aside className="w-64 bg-white text-gray-700 min-h-screen fixed left-0 top-0 border-r border-gray-200">
       <div className="p-6 border-b border-gray-200">
         <img src="/Logo.png" alt="Logo" className="h-10 w-auto" />
       </div>
 
       <nav className="mt-6 px-4 space-y-2">
         {menuItems.map((item) => {
-          const isActive = location.pathname.startsWith(item.path);
+          const isActive = getIsActive(item.path);
           return (
             <Link
               key={item.label}
               to={item.path}
-              onClick={() => setActiveMenu(item.label)}
               className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
                 isActive
                   ? 'bg-blue-600 text-white'

@@ -50,7 +50,7 @@ const LoginPage = () => {
       if (response.data.user.role === 'VENDOR') {
         navigate('/vendor-dashboard');
       } else {
-        navigate('/loigin');
+        navigate('/login');
       }
     } catch (err: any) {
       const message = err?.data?.message || 'Login failed. Please check your credentials.';

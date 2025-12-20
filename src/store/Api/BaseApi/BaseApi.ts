@@ -35,7 +35,7 @@ const baseQueryWithReauth: BaseQueryFn<
     }
     const refreshResult = await baseQuery(
       {
-        url: "/auth/refresh-token",
+        url: "/users/refresh-token",
         method: "POST",
         body: { refreshToken },
       },
@@ -56,6 +56,6 @@ const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: ["Program", "Users", "Manager", "Employee", "Viewer", "Employees"],
+  tagTypes: ["Program", "Users", "Product","Manager", "Employee", "Viewer", "Employees" ],
 });
 export default baseApi;
