@@ -19,7 +19,8 @@ import VendorRegisterPage from "@/pages/VendorRegisterPage";
 import ProtectedRoute from "./ProtectedRoutes";
 import VendorDashboardLayout from "@/pages/VendorPanel/VendorDashboardLayout";
 import { getVedordRoutes } from "./VendorRoutes";
-import Table from "@/pages/Table";
+import ProductDisplayPage from "@/pages/ProuducDisplay";
+import ProductDetailPage from "@/pages/ProductDetails";
 
 const routes = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ const routes = createBrowserRouter([
       {
         path: "/services",
         element: <Services />,
+      },
+         {
+        path: "/product/details/:id",
+        element: <ProductDetailPage />,
+      },
+        {
+        path: "/products/:query",
+        element: <ProductDisplayPage />,
       },
       {
         path: "/shop",

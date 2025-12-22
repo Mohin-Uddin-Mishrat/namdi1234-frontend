@@ -36,7 +36,7 @@ export default function CategorySidebar() {
             className="flex items-center gap-3 hover:bg-green-700 px-3 py-2 rounded transition cursor-pointer"
           >
             <Link
-              to={`/products/${encodeURIComponent(cat.categoryName)}`}
+              to={`/products/${encodeURIComponent(cat._id)}`}
               className="flex items-center w-full"
             >
               <ChevronRight className="w-5 h-5 text-green-300 flex-shrink-0" />

@@ -3,7 +3,16 @@ interface Category {
   _id: string;
   categoryName: string;
 }
-
+export interface Product {
+  _id: string;
+  productName: string;
+  productCategory: { _id: string; categoryName: string };
+  pricePerUnit: number;
+  specialPrice: number | null;
+  mainImageUrl: string;
+  stock: number;
+  currency: string;
+}
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getCategories: builder.query<Category[], void>({
@@ -25,6 +34,17 @@ const productApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Product"],
     }),
+    searchProducts: builder.query({
+      query: ({ productCategory, search, page = 1, limit = 10 }) => ({
+        url: "/products/search",
+        params: {
+          productCategory,
+          search,
+          page,
+          limit,
+        },
+      }),
+    }),
     getOneProductById: builder.query({
       query: (id) => ({
         url: `/products/${id}`,
@@ -43,14 +63,13 @@ const productApi = baseApi.injectEndpoints({
     }),
     // 👇 ADD UPDATE MUTATION
     updateProduct: builder.mutation({
-      query: ({id , body}) => ({
+      query: ({ id, body }) => ({
         url: `/products/${id}`,
         method: "PATCH",
         body: body,
       }),
       invalidatesTags: ["Product"],
     }),
-    
   }),
 });
 
@@ -61,6 +80,7 @@ export const {
   useDeleteProductMutation,
   useUpdateProductMutation,
   useGetOneProductByIdQuery,
+  useSearchProductsQuery,
 } = productApi;
 
 export default productApi;
